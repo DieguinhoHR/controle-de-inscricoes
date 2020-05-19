@@ -21,5 +21,4 @@
             @endforeach
         </tbody>
     </table>
-    <p>{{ $turmas }}</p>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Turma extends Model
@@ -11,5 +12,10 @@ class Turma extends Model
     public function getNomeAttribute($value)
     {
         return ucfirst($value);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y');
     }
 }
