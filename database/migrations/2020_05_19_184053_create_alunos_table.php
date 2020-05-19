@@ -15,6 +15,9 @@ class CreateAlunosTable extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome')->unique();
+            $table->enum('sexo', ['M', 'F']);
+            $table->date('data_nascimento');
             $table->timestamps();
         });
     }

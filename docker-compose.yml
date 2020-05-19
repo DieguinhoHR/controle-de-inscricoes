@@ -1,0 +1,83 @@
+version: "3"
+
+# Named volumes
+volumes:
+  # MySQL Data
+  coblue-mysql-data:
+    driver: local
+  # Redis Data
+  coblue-redis-data:
+    driver: local
+
+services:
+  # MySQL
+  mysql:
+    container_name: controle-de-inscricoes
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: controle_de_inscricoes
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+    volumes:
+      - coblue-mysql-data:/var/lib/mysql
+    networks:
+      - microservices
+
+  # PhpMyAdmin
+  phpmyadmin:
+    container_name: controle-de-inscricoes-microservices-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - microservices
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8081:80'
+    volumes:
+      - /sessions
+
+  # Redis
+  cache:
+    image: redis:4.0
+    container_name: controle-de-inscricoes-redis
+    command: --appendonly yes
+    volumes:
+      - coblue-redis-data:/data
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+
+  # API
+  app:
+    image: ambientum/php:7.3-nginx
+    container_name: controle-de-inscricoes-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8000:8080"
+    links:
+      - mysql
+      - cache
+    networks:
+      - microservices
+
+  # Laravel Queues
+  queue:
+    image: ambientum/php:7.2
+    container_name: coblue-queue
+    command: php artisan queue:listen
+    volumes:
+      - .:/var/www/app
+    links:
+      - mysql
+      - cache
+
+networks:
+  microservices:
