@@ -1,13 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Page Title')
-
-@section('sidebar')
-    @parent
-
-    <p>This is appended to the master sidebar.</p>
-@endsection
-
 @section('content')
-    <p>This is my body content.</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Data criação</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($turmas as $turma)
+                <tr>
+                    <th scope="row">{{ $turma->id }}</th>
+                    <td>{{ $turma->nome }}</td>
+                    <td>{{ $turma->created_at }}</td>
+                    <th scope="col">Ações</th>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <p>{{ $turmas }}</p>
 @endsection
