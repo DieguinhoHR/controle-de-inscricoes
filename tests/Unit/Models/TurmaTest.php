@@ -10,7 +10,6 @@ class TurmaTest extends TestCase
     public function testFillable()
     {
         $fillable = ['nome'];
-
         $this->assertEquals($fillable, (new Turma())->getFillable());
     }
 }

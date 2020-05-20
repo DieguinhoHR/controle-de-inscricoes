@@ -9,8 +9,13 @@ class AlunoTest extends TestCase
 {
     public function testFillable()
     {
-        $fillable = ['nome', 'sexo', 'data_nascimento'];
-
+        $fillable = ['nome', 'sexo'];
         $this->assertEquals($fillable, (new Aluno())->getFillable());
+    }
+
+    public function testDates()
+    {
+        $dates = ['data_nascimento', 'created_at', 'updated_at'];
+        $this->assertEquals($dates, (new Aluno())->getDates());
     }
 }

@@ -9,6 +9,9 @@ class Aluno extends Model
     protected $fillable = [
         'nome',
         'sexo',
+    ];
+
+    protected $dates = [
         'data_nascimento'
     ];
 }
