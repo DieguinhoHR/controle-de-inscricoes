@@ -11,12 +11,16 @@
         <div class="card-header">
             Nova turma
         </div>
+
         <div class="card-body">
             {!! Form::open(['url' => 'turmas', 'class' => 'form-horizontal row']) !!}
-                <div class="col-lg-12 mb-3">
+                <div class="col-lg-12 mb-4">
                     {!! Form::label('nome', 'Nome') !!}
                     {!! Form::text('nome', null, ['class' => 'form-control',
                         'placeholder' => 'Digite seu nome']) !!}
+                    <div class="mt-2">
+                        @include('errors.errors')
+                    </div>
                 </div>
 
                 <div class="col-lg-12 mb-2">

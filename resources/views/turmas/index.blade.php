@@ -23,7 +23,7 @@
                 </div>
             {!! Form::close() !!}
 
-            @if(!count($turmas))
+            @if ($nomeDaTurma && !$turmas->count())
                 <div class="alert alert-info" role="alert">
                     Nenhum registro encontrado com este nome
                 </div>
@@ -51,11 +51,13 @@
                                 {{ Form::close() }}
                             </td>
                             <td style="float: left;">
-                                {{ Form::open(['method' => 'DELETE', 'route' => ['turmas.destroy', $turma->id]]) }}
-                                    <button type="submit" class="btn btn-danger">
-                                        Excluir
-                                    </button>
-                                {{ Form::close() }}
+                                <a onclick="return confirm('Você realmente deseja excluir este registro')">
+                                    {{ Form::open(['method' => 'DELETE', 'route' => ['turmas.destroy', $turma->id]]) }}
+                                        <button type="submit" class="btn btn-danger">
+                                            Excluir
+                                        </button>
+                                    {{ Form::close() }}
+                                </a>
                             </td>
                         </tr>
                     @endforeach

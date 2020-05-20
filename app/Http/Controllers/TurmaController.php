@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TurmaRequest;
 use App\Turma;
 use Illuminate\Http\Request;
 
 class TurmaController extends Controller
 {
-    private const LIMIT_BY_PAGE = 10;
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -16,16 +15,14 @@ class TurmaController extends Controller
 
     public function index(Request $request)
     {
-        $turmas = Turma::orderBy('created_at', 'desc')->paginate(self::LIMIT_BY_PAGE);
+        $turmas = Turma::orderBy('created_at', 'desc')->paginate(10);
 
         $nomeDaTurma = $request->get('nome');
 
         if ($nomeDaTurma) {
-            $turmas = Turma::where('nome', 'like', "%$nomeDaTurma%")
-                ->orderBy('created_at', 'desc')
-                ->paginate(self::LIMIT_BY_PAGE);
+            $turmas = Turma::where('nome', 'like', "%$nomeDaTurma%")->orderBy('created_at', 'desc')->paginate(10);
         }
-        return view('turmas.index', compact('turmas'));
+        return view('turmas.index', compact('nomeDaTurma', 'turmas'));
     }
 
     public function create()
@@ -33,7 +30,7 @@ class TurmaController extends Controller
         return view('turmas.create');
     }
 
-    public function store(Request $request)
+    public function store(TurmaRequest $request)
     {
         Turma::create($request->all());
 
