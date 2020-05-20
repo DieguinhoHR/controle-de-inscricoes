@@ -23,7 +23,7 @@
             </div>
             {!! Form::close() !!}
 
-            @if ($nome && !$alunos->count())
+            @if ($nome && !$data->count())
                 <div class="alert alert-info" role="alert">
                     Nenhum registro encontrado com este nome
                 </div>
@@ -40,7 +40,7 @@
                 <th colspan="2"></th>
                 </thead>
                 <tbody>
-                @foreach($alunos as $aluno)
+                @foreach($data as $aluno)
                     <tr>
                         <td>{{ $aluno->id }}</td>
                         <td>{{ $aluno->nome }}</td>
@@ -68,14 +68,14 @@
                 </tbody>
             </table>
 
-            @unless(count($alunos))
+            @unless(count($data))
                 <p class="text-center">Não existem alunos cadastrados!</p>
             @endunless
 
-            <h3>Total: <span class="badge badge-primary mb-2">{{ $alunos->total() }}</span></h3>
+            <h3>Total: <span class="badge badge-primary mb-2">{{ $data->total() }}</span></h3>
 
             <div class="pagination justify-content-center">
-                {{ $alunos->links() }}
+                {{ $data->links() }}
             </div>
         </div>
     </div>

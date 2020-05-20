@@ -12,10 +12,10 @@
             Atualizar turma
         </div>
         <div class="card-body">
-            {{ Form::open(['method' => 'PUT', 'route' => ['turmas.update', $turma->id]]) }}
+            {{ Form::open(['method' => 'PUT', 'route' => ['turmas.update', $data->id]]) }}
                 <div class="col-lg-12 mb-3">
                     {{ Form::label('nome', 'Nome') }}
-                    {{ Form::text('nome', $turma->nome, [
+                    {{ Form::text('nome', $data->nome, [
                         'class' => 'form-control',
                         'placeholder' => 'Digite seu nome'
                     ]) }}

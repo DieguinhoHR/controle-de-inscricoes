@@ -23,7 +23,7 @@
                 </div>
             {!! Form::close() !!}
 
-            @if ($nomeDaTurma && !$turmas->count())
+            @if ($nome && !$data->count())
                 <div class="alert alert-info" role="alert">
                     Nenhum registro encontrado com este nome
                 </div>
@@ -38,7 +38,7 @@
                     <th colspan="2"></th>
                 </thead>
                 <tbody>
-                    @foreach($turmas as $turma)
+                    @foreach($data as $turma)
                         <tr>
                             <td>{{ $turma->id }}</td>
                             <td>{{ $turma->nome }}</td>
@@ -64,14 +64,14 @@
                 </tbody>
             </table>
 
-            @unless(count($turmas))
+            @unless(count($data))
                 <p class="text-center">Não existem turmas cadastradas!</p>
             @endunless
 
-            <h3>Total: <span class="badge badge-primary mb-2">{{ $turmas->total() }}</span></h3>
+            <h3>Total: <span class="badge badge-primary mb-2">{{ $data->total() }}</span></h3>
 
             <div class="pagination justify-content-center">
-                {{ $turmas->links() }}
+                {{ $data->links() }}
             </div>
         </div>
     </div>

@@ -26,23 +26,31 @@ class AlunoTest extends TestCase
         ], $fields);
     }
 
-//    public function testCreate()
-//    {
-//        $turma = Turma::create(['nome' => 'Test']);
-//
-//        $this->assertDatabaseHas('turmas', ['nome' => 'Test']);
-//        $this->assertEquals('Test', $turma->nome);
-//    }
-//
-//    public function testUpdate()
-//    {
-//        $turma = Turma::create(['nome' => 'Test 2']);
-//
-//        $turma = Turma::find($turma->id);
-//        $turma->update(['nome' => 'Test 3']);
-//
-//        $this->assertEquals('Test 3', $turma->nome);
-//    }
+    public function testCreate()
+    {
+        $aluno = Aluno::create([
+            'nome' => 'Test',
+            'sexo' => 'M',
+            'data_nascimento' => '1986-08-07'
+        ]);
+
+        $this->assertDatabaseHas('alunos', [
+            'nome' => 'Test',
+            'sexo' => 'M',
+            'data_nascimento' => '1986-08-07 00:00:00'
+        ]);
+        $this->assertEquals('Test', $aluno->nome);
+    }
+
+    public function testUpdate()
+    {
+        $turma = Aluno::create(['nome' => 'Test 2']);
+
+        $turma = Aluno::find($turma->id);
+        $turma->update(['nome' => 'Test 3']);
+
+        $this->assertEquals('Test 3', $turma->nome);
+    }
 //
 //    public function testDelete()
 //    {
