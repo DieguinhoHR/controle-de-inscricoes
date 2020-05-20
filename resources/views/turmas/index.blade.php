@@ -64,6 +64,10 @@
                 </tbody>
             </table>
 
+            @unless(count($turmas))
+                <p class="text-center">Não existem produtos cadastrados!</p>
+            @endunless
+
             <h3>Total: <span class="badge badge-primary mb-2">{{ $turmas->total() }}</span></h3>
 
             <div class="pagination justify-content-center">
@@ -71,6 +75,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection
