@@ -4,5 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/turmas', 'TurmaController@index');
+Route::get('/', function () {
+    return view('auth.login');
+});
+Route::resource('/turmas', 'TurmaController');
