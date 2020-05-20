@@ -44,11 +44,26 @@ class TurmaController extends Controller
 
     public function edit($id)
     {
+        $turma = Turma::findOrFail($id);
 
+        return view('turmas.edit', compact('turma'));
+    }
+
+    public function update($id, Request $request)
+    {
+        Turma::findOrFail($id)->update($request->all());
+
+        $request->session()->flash('flash_message', 'Registro atualizado com sucesso!');
+
+        return redirect('turmas');
     }
 
     public function destroy($id)
     {
-        dd($id);
+        Turma::findOrFail($id)->delete();
+
+        //$request->session()->flash('flash_message', 'Registro atualizado com sucesso!');
+
+        return redirect('turmas');
     }
 }
