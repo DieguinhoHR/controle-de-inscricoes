@@ -65,7 +65,7 @@
             </table>
 
             @unless(count($turmas))
-                <p class="text-center">Não existem produtos cadastrados!</p>
+                <p class="text-center">Não existem turmas cadastradas!</p>
             @endunless
 
             <h3>Total: <span class="badge badge-primary mb-2">{{ $turmas->total() }}</span></h3>
