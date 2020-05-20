@@ -37,7 +37,7 @@ class TurmaController extends Controller
     {
         Turma::create($request->all());
 
-        $request->session()->flash('flash_message', 'Registro inserido com sucesso!');
+        \Session::flash('flash_message', 'Registro inserido com sucesso!');
 
         return redirect('turmas');
     }
@@ -53,7 +53,7 @@ class TurmaController extends Controller
     {
         Turma::findOrFail($id)->update($request->all());
 
-        $request->session()->flash('flash_message', 'Registro atualizado com sucesso!');
+        \Session::flash('flash_message', 'Registro atualizado com sucesso!');
 
         return redirect('turmas');
     }
@@ -62,7 +62,7 @@ class TurmaController extends Controller
     {
         Turma::findOrFail($id)->delete();
 
-        //$request->session()->flash('flash_message', 'Registro atualizado com sucesso!');
+        \Session::flash('flash_message','Registro excluido com sucesso!');
 
         return redirect('turmas');
     }
