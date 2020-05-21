@@ -23,11 +23,7 @@ class TurmaControllerTest extends TestCase
         $response = $this->get(route('turmas.index'));
         $response->assertStatus(200)
                  ->assertSee('Turmas')
-                 ->assertSee('Listagem de turmas')
-                 ->assertSee('ID')
-                 ->assertSee('Nome')
-                 ->assertSee('Data criação')
-                 ->assertSee('Ações');
+                 ->assertSee('Listagem de turmas');
     }
 
     public function testInvalidationData()
