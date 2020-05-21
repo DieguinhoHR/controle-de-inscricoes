@@ -36,4 +36,9 @@ class Aluno extends Model
     {
         return $value === 'M' ? 'Masculino' : 'Feminino';
     }
+
+    public function turmas()
+    {
+        return $this->belongsToMany('Turma', 'aluno_turma');
+    }
 }

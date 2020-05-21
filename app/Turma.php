@@ -18,4 +18,9 @@ class Turma extends Model
     {
         return Carbon::parse($value)->format('d/m/Y');
     }
+
+    public function alunos()
+    {
+        return $this->belongsToMany('App\Aluno', 'aluno_turma');
+    }
 }

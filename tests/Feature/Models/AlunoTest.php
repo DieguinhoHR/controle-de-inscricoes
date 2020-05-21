@@ -44,18 +44,22 @@ class AlunoTest extends TestCase
 
     public function testUpdate()
     {
-        $turma = Aluno::create(['nome' => 'Test 2']);
+        $aluno = Aluno::create([
+            'nome' => 'Test 2',
+            'sexo' => 'M',
+            'data_nascimento' => '1986-08-07 00:00:00'
+        ]);
 
-        $turma = Aluno::find($turma->id);
-        $turma->update(['nome' => 'Test 3']);
+        $aluno = Aluno::find($aluno->id);
+        $aluno->update(['nome' => 'Test 3']);
 
-        $this->assertEquals('Test 3', $turma->nome);
+        $this->assertEquals('Test 3', $aluno->nome);
     }
-//
-//    public function testDelete()
-//    {
-//        $turma = factory(Turma::class)->create();
-//        $turma->delete();
-//        $this->assertNull(Turma::find($turma->id));
-//    }
+
+    public function testDelete()
+    {
+        $aluno = factory(Aluno::class)->create();
+        $aluno->delete();
+        $this->assertNull(Aluno::find($aluno->id));
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Traits;
 
+use App\Aluno;
 use Illuminate\Http\Request;
 
 trait TraitController
@@ -36,11 +37,26 @@ trait TraitController
      */
     public function create()
     {
+        if ( $this->data['redirect_to'] == 'turmas') {
+            $alunos = Aluno::orderBy('nome', 'desc')->get(['id', 'nome']);;
+
+            return view($this->data['view_create'], compact('alunos'));
+        }
         return view($this->data['view_create']);
     }
 
     public function store(Request $request)
     {
+        if ($this->data['redirect_to'] === 'turmas') {
+            $request->validate(['nome' => 'required|unique:turmas|max:255']);
+        } else {
+            $request->validate([
+                'nome' => 'required|unique:alunos|max:255',
+                'sexo' => 'required',
+                'data_nascimento' => 'required|date'
+            ]);
+        }
+
         $this->data['model']->create($request->all());
 
         \Session::flash('flash_message', 'Registro inserido com sucesso!');
@@ -70,6 +86,6 @@ trait TraitController
 
         \Session::flash('flash_message','Registro excluido com sucesso!');
 
-        return redirect('turmas');
+        return redirect($this->data['redirect_to']);
     }
 }

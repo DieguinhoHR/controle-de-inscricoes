@@ -24,7 +24,8 @@
 
                 <div class="col-lg-12 mb-4">
                     {!! Form::label('data_nascimento', 'Data nascimento') !!}
-                    {!! Form::text('data_nascimento', $data->data_nascimento, ['class' => 'form-control',
+                    {!! Form::date('data_nascimento',
+                        date('Y-m-d', strtotime($data->data_nascimento)), ['class' => 'form-control',
                         'placeholder' => 'Digite sua data de nascimento']) !!}
                     <div class="mt-2">
                         @include('errors.errors')
@@ -32,9 +33,11 @@
                 </div>
 
                 <div class="col-lg-12 mb-4">
-                    {!! Form::label('sexo', 'Sexo') !!}
-                    {!! Form::text('sexo', $data->sexo, ['class' => 'form-control',
-                        'placeholder' => 'Digite seu sexo']) !!}
+                    {{ Form::label('sexo', 'Sexo') }}
+                    {{ Form::select('sexo',
+                        ['M' => 'Masculino', 'F' => 'Feminino'],
+                        $data->sexo == 'Feminino' ? 'F' : 'M',
+                        ['class' => 'form-control']) }}
                     <div class="mt-2">
                         @include('errors.errors')
                     </div>

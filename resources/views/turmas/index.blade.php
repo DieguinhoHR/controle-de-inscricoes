@@ -23,56 +23,57 @@
                 </div>
             {!! Form::close() !!}
 
-            @if ($nome && !$data->count())
-                <div class="alert alert-info" role="alert">
-                    Nenhum registro encontrado com este nome
-                </div>
-            @endif
+            <div class="row">
+                @foreach($data as $turma)
+                    <div class="col">
+                        <div class="card">
+                            <h5 class="card-header">{{ $turma->nome }}</h5>
+                            <div class="card-body">
+                                @foreach($turma->alunos as $aluno)
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item">
+                                            <h5 class="card-title">Nome: <span class="badge badge-primary">{{ $aluno->nome }}</span></h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5 class="card-title">Data nascimento: <span class="badge badge-primary">{{ $aluno->data_nascimento }}</span></p></h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5 class="card-title">Sexo: <span class="badge badge-primary">{{ $aluno->sexo }}</span></p></h5>
+                                        </li>
+                                    </ul>
+                                @endforeach
 
-            <table class="table table-hover">
-                <thead>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Data criação</th>
-                    <th>Ações</th>
-                    <th colspan="2"></th>
-                </thead>
-                <tbody>
-                    @foreach($data as $turma)
-                        <tr>
-                            <td>{{ $turma->id }}</td>
-                            <td>{{ $turma->nome }}</td>
-                            <td>{{ $turma->created_at }}</td>
-                            <td style="float: left;">
-                                {{ Form::open(['method' => 'GET', 'route' => ['turmas.edit', $turma->id]]) }}
-                                    <button type="submit" class="btn btn-success">
-                                        Atualizar
-                                    </button>
-                                {{ Form::close() }}
-                            </td>
-                            <td style="float: left;">
-                                <a onclick="return confirm('Você realmente deseja excluir este registro')">
-                                    {{ Form::open(['method' => 'DELETE', 'route' => ['turmas.destroy', $turma->id]]) }}
-                                        <button type="submit" class="btn btn-danger">
-                                            Excluir
-                                        </button>
-                                    {{ Form::close() }}
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-2 col-xl-2 col-lg-2">
+                                        {{ Form::open(['method' => 'GET', 'route' => ['turmas.edit', $turma->id]]) }}
+                                            <button type="submit" class="btn btn-outline-primary mb-3">
+                                                Atualizar
+                                            </button>
+                                        {{ Form::close() }}
+                                    </div>
+
+                                    <div class="col">
+                                        <a onclick="return confirm('Você realmente deseja excluir este registro')">
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['turmas.destroy', $turma->id]]) }}
+                                                <button type="submit" class="btn btn-outline-danger ml-1">
+                                                    Excluir
+                                                </button>
+                                            {{ Form::close() }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Total de alunos: {{ $turma->alunos->count() }}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
             @unless(count($data))
                 <p class="text-center">Não existem turmas cadastradas!</p>
             @endunless
-
-            <h3>Total: <span class="badge badge-primary mb-2">{{ $data->total() }}</span></h3>
-
-            <div class="pagination justify-content-center">
-                {{ $data->links() }}
-            </div>
         </div>
     </div>
 @endsection

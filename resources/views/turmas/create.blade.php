@@ -23,10 +23,32 @@
                     </div>
                 </div>
 
+                <div class="col-lg-4 mb-3">
+                    {!! Form::label('aluno_id', 'Alunos') !!}<br />
+                    <select id="example-dropUp" multiple name="aluno_id[]">
+                        @foreach($alunos as $aluno)
+                            <option value="{{ $aluno->id }}">{{ $aluno->nome }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="col-lg-12 mb-2">
-                    {{ Form::submit('Salvar', ['class' => 'btn btn-primary']) }}
+                    {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example-dropUp').multiselect({
+                enableFiltering: true,
+                includeSelectAllOption: true,
+                maxHeight: 400,
+                dropUp: true
+            });
+        });
+    </script>
 @endsection
