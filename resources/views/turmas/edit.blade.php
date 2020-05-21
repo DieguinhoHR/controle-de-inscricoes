@@ -24,12 +24,19 @@
                 <div class="col-lg-4 mb-3">
                     {!! Form::label('aluno_id', 'Alunos') !!}<br />
                     <select id="example-dropUp" multiple name="aluno_id[]">
-                        @foreach($alunos as $key => $aluno)
-                            <option value="{{ $aluno->id }}" {{ $aluno->id == $data['alunos'][0]['id'] ? 'selected' : '' }}>
-                                {{ $aluno->nome }}
-                            </option>
+                        @foreach($alunos as $aluno)
+                                <option value="{{ $aluno->id }}">
+                                    {{ $aluno->nome }}
+                                </option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="col-lg-12 mb-2">
+                    <p>Alunos selecionados</p>
+                    @foreach($alunosTurma as $alunoTurma)
+                        <span class="badge badge-primary">{{ $alunoTurma->aluno['nome'] }}</span>
+                    @endforeach
                 </div>
 
                 <div class="col-lg-12 mb-2">

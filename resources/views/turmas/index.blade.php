@@ -10,22 +10,24 @@
             Listagem de turmas
         </div>
         <div class="card-body">
-            {!!  Form::open(['url' => 'turmas', 'method' => 'get', 'class' => 'form-inline', 'role' => 'form']) !!}
-                <div class='form-group'>
-                    {!! Form::input('search', 'nome', null, [
-                        'placeholder'    => 'Digite o nome da turma',
-                        'size'           => '128px',
-                        'class'          => 'form-control col-lg-12 mb-3',
-                        'data-toggle'    => 'tooltip',
-                        'data-placement' => 'right',
-                        'title'          => 'Digite o nome e tecle Enter para realizar uma busca'
-                    ]) !!}
-                </div>
-            {!! Form::close() !!}
+            @if (count($data))
+                {!!  Form::open(['url' => 'turmas', 'method' => 'get', 'class' => 'form-inline', 'role' => 'form']) !!}
+                    <div class='form-group'>
+                        {!! Form::input('search', 'nome', null, [
+                            'placeholder'    => 'Digite o nome da turma',
+                            'size'           => '128px',
+                            'class'          => 'form-control col-lg-12 mb-3',
+                            'data-toggle'    => 'tooltip',
+                            'data-placement' => 'right',
+                            'title'          => 'Digite o nome e tecle Enter para realizar uma busca'
+                        ]) !!}
+                    </div>
+                {!! Form::close() !!}
+            @endif
 
             <div class="row">
                 @foreach($data as $turma)
-                    <div class="col">
+                    <div class="col-sm-6 col-md-6 col-xl-6 col-lg-6 mb-3">
                         <div class="card">
                             <h5 class="card-header">{{ $turma->nome }}</h5>
                             <div class="card-body">

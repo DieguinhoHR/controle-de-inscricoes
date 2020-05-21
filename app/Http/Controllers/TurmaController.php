@@ -42,8 +42,9 @@ class TurmaController extends Controller
         $data = Turma::findOrFail($id);
 
         $alunos = Aluno::orderBy('nome', 'desc')->get(['id', 'nome']);
+        $alunosTurma = AlunoTurma::where('turma_id', $data->id)->get();
 
-        return view('turmas.edit', compact('data', 'alunos'));
+        return view('turmas.edit', compact('data', 'alunos', 'alunosTurma'));
     }
 
     public function update($id, Request $request)

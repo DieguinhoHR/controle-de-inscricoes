@@ -9,3 +9,4 @@ Route::get('/', function () {
 });
 Route::resource('/turmas', 'TurmaController');
 Route::resource('/alunos', 'AlunoController');
+

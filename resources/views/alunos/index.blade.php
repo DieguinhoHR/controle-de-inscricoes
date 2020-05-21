@@ -10,18 +10,20 @@
             Listagem de alunos
         </div>
         <div class="card-body">
-            {!!  Form::open(['url' => 'alunos', 'method' => 'get', 'class' => 'form-inline', 'role' => 'form']) !!}
-            <div class='form-group'>
-                {!! Form::input('search', 'nome', null, [
-                    'placeholder'    => 'Digite o nome do aluno',
-                    'size'           => '128px',
-                    'class'          => 'form-control col-lg-12 mb-3',
-                    'data-toggle'    => 'tooltip',
-                    'data-placement' => 'right',
-                    'title'          => 'Digite o nome e tecle Enter para realizar uma busca'
-                ]) !!}
-            </div>
-            {!! Form::close() !!}
+            @if (count($data))
+                {!!  Form::open(['url' => 'alunos', 'method' => 'get', 'class' => 'form-inline', 'role' => 'form']) !!}
+                <div class='form-group'>
+                    {!! Form::input('search', 'nome', null, [
+                        'placeholder'    => 'Digite o nome do aluno',
+                        'size'           => '128px',
+                        'class'          => 'form-control col-lg-12 mb-3',
+                        'data-toggle'    => 'tooltip',
+                        'data-placement' => 'right',
+                        'title'          => 'Digite o nome e tecle Enter para realizar uma busca'
+                    ]) !!}
+                </div>
+                {!! Form::close() !!}
+            @endif
 
             @if ($nome && !$data->count())
                 <div class="alert alert-info" role="alert">
